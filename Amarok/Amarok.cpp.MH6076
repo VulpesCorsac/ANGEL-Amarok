@@ -1,0 +1,429 @@
+#include "Amarok.h"
+#include "ui_Amarok.h"
+
+Amarok::Amarok(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::Amarok)
+{
+    this->constructor = true;
+
+    ui->setupUi(this);
+
+    this->experimentMode.clear();
+    this->experimentMode.push_back("Single");
+    this->experimentMode.push_back("Continuous");
+    this->experimentMode.push_back("Kinetics");
+    ui->comboBoxExperimentMode->addItems(this->experimentMode);
+    ui->comboBoxExperimentMode->setCurrentText("Single");
+
+    this->replotMode.clear();
+    this->replotMode.push_back("Auto");
+    this->replotMode.push_back("Manual");
+    ui->comboBoxReplot_1->addItems(this->replotMode);
+    ui->comboBoxReplot_1->setCurrentText("Auto");
+    ui->comboBoxReplot_2->addItems(this->replotMode);
+    ui->comboBoxReplot_2->setCurrentText("Auto");
+
+    this->autoKineticsJumpMode.clear();
+    this->autoKineticsJumpMode.push_back("Min");
+    this->autoKineticsJumpMode.push_back("Max");
+    ui->comboBoxJumpAfterExtremum->addItems(this->autoKineticsJumpMode);
+    ui->comboBoxJumpAfterExtremum->setCurrentText("Min");
+
+    this->signMode.clear();
+    this->signMode.push_back(" > 0");
+    this->signMode.push_back(" < 0");
+    ui->comboBoxDFresDT->addItems(this->signMode);
+    ui->comboBoxDFresDT->setCurrentText(" > 0");
+
+    this->xAxisNormalMode.clear();
+    this->xAxisNormalMode.push_back("R");
+    this->xAxisNormalMode.push_back("Theta");
+    ui->comboBoxXAxisValue_1->addItems(this->xAxisNormalMode);
+    ui->comboBoxXAxisValue_1->setCurrentText("R");
+    ui->comboBoxXAxisValue_2->addItems(this->xAxisNormalMode);
+    ui->comboBoxXAxisValue_2->setCurrentText("Theta");
+
+    this->yAxisNormalMode.clear();
+    this->yAxisNormalMode.push_back("Fgen");
+    this->yAxisNormalMode.push_back("Fext");
+    this->yAxisNormalMode.push_back("Time");
+    ui->comboBoxYAxisValue_1->addItems(this->yAxisNormalMode);
+    ui->comboBoxYAxisValue_1->setCurrentText("Time");
+    ui->comboBoxYAxisValue_2->addItems(this->yAxisNormalMode);
+    ui->comboBoxYAxisValue_2->setCurrentText("Time");
+
+    this->lockInAmplifierModel = this->lockInAmplifier->getSupportedTypes();
+    this->lockInAmplifierModel.push_back("SET IT");
+    ui->comboBoxModelLockInAmplifier->addItems(this->lockInAmplifierModel);
+    ui->comboBoxModelLockInAmplifier->setCurrentText("SET IT");
+
+    this->GeneratorModel = this->generator->getSupportedTypes();
+    this->GeneratorModel.push_back("SET IT");
+    ui->comboBoxModelGenerator->addItems(this->GeneratorModel);
+    ui->comboBoxModelGenerator->setCurrentText("SET IT");
+
+    foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
+        ui->comboBoxSerialPortLockInAmplifier->addItem(info.portName());
+        ui->comboBoxSerialPortGenerator->addItem(info.portName());
+    }
+
+
+
+    this->constructor = false;
+}
+
+Amarok::~Amarok()
+{
+    delete ui;
+}
+
+//  Hiding and Showing
+
+void Amarok::hideGraph(const int &i) const
+{
+    if (i == 0 || i == 1) {
+        ui->groupBoxGraph_1->hide();
+        ui->graph_1->hide();
+    }
+    if (i == 0 || i == 2) {
+        ui->groupBoxGraph_2->hide();
+        ui->graph_2->hide();
+    }
+
+    return;
+}
+
+void Amarok::hideAxises(const int &i) const
+{
+    if (i == 0 || i == 1)
+        ui->groupBoxAxis_1->hide();
+    if (i == 0 || i == 2)
+        ui->groupBoxAxis_2->hide();
+
+    return;
+}
+
+void Amarok::hideCurrentReadingsAndTiming() const
+{
+    ui->groupBoxCurrentReadingsAndTiming->hide();
+
+    return;
+}
+
+void Amarok::hideExperimentMainSettings() const
+{
+    ui->groupBoxExprimentMainSettings->hide();
+
+    return;
+}
+
+void Amarok::hideExperimentKinetics() const
+{
+    ui->groupBoxExperimentKinetics->hide();
+
+    return;
+}
+
+void Amarok::hideGroupBoxes() const
+{
+    hideGraph();
+    hideCurrentReadingsAndTiming();
+    hideExperimentMainSettings();
+    hideExperimentKinetics();
+
+    return;
+}
+
+void Amarok::hideLockInAmplifier() const
+{
+    ui->labelTimeConstantLockInAmplifier->hide();
+    ui->comboBoxTimeConstantLockInAmplifier->hide();
+
+    ui->checkBoxAutosettingsLockInAmplifier->hide();
+
+    ui->labelInputRangeLockInAmplifier->hide();
+    ui->comboBoxInputRangeLockInAmplifier->hide();
+
+    ui->labelSensivityLockInAmplifier->hide();
+    ui->comboBoxSensivityLockInAmplifier->hide();
+
+    return;
+}
+
+void Amarok::hideGenerator() const
+{
+    ui->labelAmplitudeGenerator->hide();
+    ui->doubleSpinBoxAmplitudeGenerator->hide();
+
+    ui->labelOffsetGenerator->hide();
+    ui->doubleSpinBoxOffsetGenerator->hide();
+
+    ui->labelFrequencyFromGenerator->hide();
+    ui->doubleSpinBoxFrequencyFromGenerator->hide();
+
+    ui->labelFrequencyToGenerator->hide();
+    ui->doubleSpinBoxFrequencyToGenerator->hide();
+
+    ui->labelFrequencyStepGenerator->hide();
+    ui->doubleSpinBoxFrequencyStepGenerator->hide();
+
+    return;
+}
+
+void Amarok::hideTest() const
+{
+    ui->pushButtonTestEquipment->hide();
+
+    return;
+}
+
+void Amarok::hideGeneratorPolling() const
+{
+    ui->checkBoxAutosettingsLockInAmplifier->hide();
+
+    return;
+}
+
+void Amarok::hideExperimentMode() const
+{
+    ui->labelExperimentMode->hide();
+    ui->comboBoxExperimentMode->hide();
+
+    return;
+}
+
+void Amarok::hideAll() const
+{
+    hideGroupBoxes();
+    hideLockInAmplifier();
+    hideGenerator();
+    hideTest();
+    hideExperimentMode();
+
+    return;
+}
+
+void Amarok::showGraph(const int &i) const
+{
+    if (i == 0 || i == 1) {
+        ui->groupBoxGraph_1->show();
+        ui->graph_1->show();
+    }
+    if (i == 0 || i == 2) {
+        ui->groupBoxGraph_2->show();
+        ui->graph_2->show();
+    }
+
+    return;
+}
+
+void Amarok::showAxises(const int &i) const
+{
+    if (i == 0 || i == 1)
+        ui->groupBoxAxis_1->show();
+    if (i == 0 || i == 2)
+        ui->groupBoxAxis_2->show();
+
+    return;
+}
+
+void Amarok::showCurrentReadingsAndTiming() const
+{
+    ui->groupBoxCurrentReadingsAndTiming->show();
+
+    return;
+}
+
+void Amarok::showExperimentMainSettings() const
+{
+    ui->groupBoxExprimentMainSettings->show();
+
+    return;
+}
+
+void Amarok::showExperimentKinetics() const
+{
+    ui->groupBoxExperimentKinetics->show();
+
+    return;
+}
+
+void Amarok::showGroupBoxes() const
+{
+    showGraph();
+    showCurrentReadingsAndTiming();
+    showExperimentMainSettings();
+    showExperimentKinetics();
+
+    return;
+}
+
+void Amarok::showLockInAmplifier() const
+{
+    if (this->lockInAmplifier->workWithTimeConstant()) {
+        ui->labelTimeConstantLockInAmplifier->show();
+        ui->comboBoxTimeConstantLockInAmplifier->show();
+    }
+
+    ui->checkBoxAutosettingsLockInAmplifier->show();
+
+    if (this->lockInAmplifier->workWithVoltageInputRange()) {
+        ui->labelInputRangeLockInAmplifier->show();
+        ui->comboBoxInputRangeLockInAmplifier->show();
+    }
+
+    if (this->lockInAmplifier->workWithSensivity()) {
+        ui->labelSensivityLockInAmplifier->show();
+        ui->comboBoxSensivityLockInAmplifier->show();
+    }
+
+    return;
+}
+
+void Amarok::showGenerator() const
+{
+    if (this->generator->workWithAmplitude()) {
+        ui->labelAmplitudeGenerator->show();
+        ui->doubleSpinBoxAmplitudeGenerator->show();
+    }
+
+    if (this->generator->workWithOffset()) {
+        ui->labelOffsetGenerator->show();
+        ui->doubleSpinBoxOffsetGenerator->show();
+    }
+
+    if (this->generator->workWithFrequency()) {
+        ui->labelFrequencyFromGenerator->show();
+        ui->doubleSpinBoxFrequencyFromGenerator->show();
+
+        ui->labelFrequencyToGenerator->show();
+        ui->doubleSpinBoxFrequencyToGenerator->show();
+
+        ui->labelFrequencyStepGenerator->show();
+        ui->doubleSpinBoxFrequencyStepGenerator->show();
+    }
+
+    return;
+}
+
+void Amarok::showTest() const
+{
+    ui->pushButtonTestEquipment->show();
+
+    return;
+}
+
+void Amarok::showGeneratorPolling() const
+{
+    ui->checkBoxAutosettingsLockInAmplifier->show();
+
+    return;
+}
+
+void Amarok::showExperimentMode() const
+{
+    ui->labelExperimentMode->show();
+    ui->comboBoxExperimentMode->show();
+
+    return;
+}
+
+void Amarok::showAll() const
+{
+    showGroupBoxes();
+    showLockInAmplifier();
+    showGenerator();
+    showTest();
+    showExperimentMode();
+
+    return;
+}
+
+// Plotting
+
+// Lock-in Amplifier
+
+// Generator
+
+// Experiment
+
+// Buttons react
+
+void Amarok::on_comboBoxExperimentMode_currentTextChanged(const QString &arg1)
+{
+    if (arg1 == "Single") {
+        ui->progressBarExperiment->show();
+        ui->lcdNumber->hide();
+
+        ui->labelExperimentAverageOfPoints->show();
+        ui->spinBoxAverageOfPoints->show();
+
+        showAxises();
+        hideExperimentKinetics();
+    }
+
+    if (arg1 == "Continuous") {
+        ui->progressBarExperiment->show();
+        ui->lcdNumber->show();
+
+        ui->labelExperimentAverageOfPoints->show();
+        ui->spinBoxAverageOfPoints->show();
+
+        showAxises();
+        hideExperimentKinetics();
+    }
+
+    if (arg1 == "Kinetics") {
+        ui->progressBarExperiment->hide();
+        ui->lcdNumber->show();
+
+        ui->labelExperimentAverageOfPoints->hide();
+        ui->spinBoxAverageOfPoints->hide();
+
+        hideAxises();
+        showExperimentKinetics();
+    }
+
+    return;
+}
+
+void Amarok::on_comboBoxReplot_1_currentTextChanged(const QString &arg1)
+{
+    if (arg1 == "Auto") {
+        ui->pushButtonRangeManualreplot_1->hide();
+
+        ui->labelRangeYmax_1->hide();
+        ui->lineEditRangeYmax_1->hide();
+
+        ui->labelRangeYmin_1->hide();
+        ui->lineEditRangeYmin_1->hide();
+
+        ui->labelRangeXmin_1->hide();
+        ui->lineEditRangeXmin_1->hide();
+
+        ui->labelRangeXmax_1->hide();
+        ui->lineEditRangeXmax_1->hide();
+    } else {
+        ui->pushButtonRangeManualreplot_1->show();
+
+        ui->labelRangeYmax_1->show();
+        ui->lineEditRangeYmax_1->show();
+
+        ui->labelRangeYmin_1->show();
+        ui->lineEditRangeYmin_1->show();
+
+        ui->labelRangeXmin_1->show();
+        ui->lineEditRangeXmin_1->show();
+
+        ui->labelRangeXmax_1->show();
+        ui->lineEditRangeXmax_1->show();
+    }
+
+    return;
+}
+
+void Amarok::on_comboBoxReplot_2_currentTextChanged(const QString &arg1)
+{
+
+}
