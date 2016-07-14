@@ -7,7 +7,7 @@
 QT       += core gui serialport testlib
 CONFIG   += c++11
 
-CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT
+#CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT
 
 QT.testlib.CONFIG -= console
 

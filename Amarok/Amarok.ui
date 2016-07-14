@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Amarok v0.0.1</string>
+   <string>Amarok v1.0.0</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QGroupBox" name="groupBoxLockInAmplifier">
@@ -605,7 +605,7 @@
         <item>
          <widget class="QLCDNumber" name="lcdNumber">
           <property name="digitCount">
-           <number>2</number>
+           <number>3</number>
           </property>
          </widget>
         </item>
@@ -953,6 +953,9 @@
           <property name="enabled">
            <bool>false</bool>
           </property>
+          <property name="text">
+           <string>NA</string>
+          </property>
          </widget>
         </item>
        </layout>
@@ -970,6 +973,9 @@
          <widget class="QLineEdit" name="lineEditSNR">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>NA</string>
           </property>
          </widget>
         </item>
@@ -1031,6 +1037,9 @@
           <property name="maximum">
            <double>2000000.000000000000000</double>
           </property>
+          <property name="value">
+           <double>10.000000000000000</double>
+          </property>
          </widget>
         </item>
        </layout>
@@ -1045,12 +1054,15 @@
          </widget>
         </item>
         <item>
-         <widget class="QDoubleSpinBox" name="doubleSpinBoxJump_2">
+         <widget class="QDoubleSpinBox" name="doubleSpinBoxJumpDevider">
           <property name="decimals">
            <number>3</number>
           </property>
           <property name="maximum">
            <double>99.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.100000000000000</double>
           </property>
           <property name="value">
            <double>1.500000000000000</double>

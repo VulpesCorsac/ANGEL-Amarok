@@ -3,18 +3,18 @@
 
 #include <QMainWindow>
 
-//#include <QSerialPort>
-//#include <QSerialPortInfo>
+//#include <QSerialPort> // NOT NEEDED
+//#include <QSerialPortInfo> // NOT NEEDED
 
-//#include <QDateTime>
-//#include <QTime>
-//#include <QTimer>
+//#include <QDateTime> // NOT NEEDED
+//#include <QTime> // NOT NEEDED
+#include <QTimer>
 
-//#include <QDir>
+//#include <QDir> // NOT NEEDED
 
-//#include <stdio.h>
-//#include <iostream>
-//#include <iomanip>
+//#include <stdio.h> // NOT NEEDED
+#include <iostream>
+#include <iomanip>
 
 //#include "qcustomplot.h"
 
@@ -24,12 +24,26 @@ namespace Ui {
     class Amarok;
 }
 
+struct KineticRoundReturn {
+    double Time;
+    double Fext;
+    double ThetaPeak;
+};
+
 class Amarok : public QMainWindow
 {
     Q_OBJECT
 
 private:
+
     bool constructor = false;
+    bool listLoad = false;
+
+    bool roundRun = false;
+    bool kineticRun = false;
+
+    bool pause = true;
+    bool stop = true;
 
     QStringList experimentMode;
     QStringList autoKineticsJumpMode;
@@ -54,8 +68,8 @@ private:
     QString kineticPath = "";
     QString currentKineticPath = "";
 
-    QString reserveFileNameHeader = "Experiment_Reserve_File";
-    QString userFileNameHeader    = "";
+    QString reserveFileName = "Experiment_Reserve_File";
+    QString userFileName    = "";
 
     double addUp   = 0.0001;
     double subDown = 0.0001;
@@ -69,8 +83,10 @@ private:
 
     int analizingPointsForLockInAmplifierAutosettings = 100;
 
+    const int minWait = 10;
     int waitBeforeExperiment = 100;
     int waitAfterNewFrequency = 150;
+    int waitAfterNewFrequencyKinetic = 50;
 
     int generatorSendTimes = 5;
     double eps = 1e-3;
@@ -82,9 +98,30 @@ private:
     double to   = 0;
     double step = 0;
 
+    QTimer replotTimer;
+    QTime allTime;
+
+    double startTime = 0;
+    double newRoundTime = 0;
+
+    const int maxPointForReplot = 3;
+
     SimpleExperimentData simpleExperimentData;
     KineticThetaData kineticThetaData;
     KineticFrequencyData kineticFrequencyData;
+
+    std::vector < double > RSDvector;
+    std::vector < double > ThetaSDvector;
+    std::vector < double > FSDvector;
+
+    QString kineticTask = "";
+    int kineticRound = 0;
+
+    const int minNormalPointNumber = 5;
+
+    const double thetaMaxDeviation = 3;
+    double thetaExtremumDepth = 0;
+    double thetaLine = 0;
 
 public:
     explicit Amarok(QWidget *parent = 0);
@@ -122,12 +159,16 @@ private slots:
     void initPlot(const int &i = 0) const;
 
     void updateAxisesLabels(const int &i = 0) const;
+    void setBoundaries(const int &i = 0) const;
+    void fillAxisesLabels(const QString &experimentMode = "Normal") const;
 
     void on_plot_1_Clicked(QMouseEvent *event) const;
     void on_plot_2_Clicked(QMouseEvent *event) const;
 
-    void updatePlot(const int &i = 0) const;
-    void replotPlot(const int &i = 0) const;
+    void updatePlot(const int &i) const;
+    void updatePlot() const;
+    void replotPlot(const int &i);
+    void replotPlot();
 
     void pushPointOnPlot(const SimpleExperimentPoint &point) const;
     void pushPointOnPlot(const KineticThetaPoint &point) const;
@@ -135,32 +176,50 @@ private slots:
 
 // Lock-in Amplifier
     double getMaxValueInRange(const double &min, const double &max) const;
+    void fillLockInAmplifierButtons();
+    double getR() const;
+    void getR(double &R) const;
+    double getTheta() const;
+    void getTheta(double &Theta) const;
+    double getFext() const;
+    void getFext(double &Fext) const;
+    void getRThetaF(double &R, double &Theta, double &Fext) const;
+    void getSDAll(double &R, double &RSD, double &Theta, double &ThetaSD, double &Fext, double &FextSD, const int &average);
 
 // Generator
     void changeGeneratorSettings(const QString &str = "") const;
+    void fillGeneratorButtons();
     void setFrequency(const double &new_frequency, bool confirm) const;
     void setFrequency(const double &new_frequency) const;
 
 // Experiment
+    bool inRange(const double &min, const double &max, const double &value) const;
+
     void changeCurrentExperimentSettings();
     void changeCurrentExperimentSettings(const QString &str); // Calling changeCurrentSettings();
     void changeCurrentExperimentSettings(const bool &flag);   // Calling changeCurrentSettings();
 
-    void exportSettings(const QString &fileName) const; // TODO
+    void exportSettings(const QString &fileName = "") const;
 
     QString getFileNamePathPrefix(const QString &str = "") const;
     QString getFileNameTimePostfix(const QString &str = "") const;
     QString getFileNameExtension(const QString &str = "", const QString &mode = "SimpleExperiment") const;
 
-    void timerStart(); // TODO
-    void timerPause(); // TODO
-    void timerStop();  // TODO
+    void timerStart();
+    void timerPause();
+    void timerStop();
 
-    void experimentInit(); // TODO
-    void experimentExport(const QString &fileName = ""); // TODO
+    void experimentInit() const;
+    void experimentExport(const QString &fileName = "") const;
 
-    void simpleExperimentRun();  // TODO
-    void kineticExperimentRun(); // TODO
+    SimpleExperimentPoint fillPoint(const double &Fgen, const int &average);
+    void addNewPoint(const double &Fgen);
+
+    void simpleExperimentRun(const QString &runtimeExportDir = "", const QString &runtimeExportFile = "");
+
+    void kineticPreScanRun();
+    KineticRoundReturn kineticRoundRun(const QString &fileName = "");
+    void kineticExperimentRun();
 
 // Buttons react
     void on_comboBoxExperimentMode_currentTextChanged(const QString &arg1);
@@ -176,20 +235,24 @@ private slots:
     void on_pushButtonRangeManualReplot_1_clicked();
     void on_pushButtonRangeManualReplot_2_clicked();
 
-    void on_comboBoxTimeConstantLockInAmplifier_currentTextChanged(const QString &arg1); // TODO
-    void on_comboBoxInputRangeLockInAmplifier_currentTextChanged(const QString &arg1);   // TODO
-    void on_comboBoxSensivityLockInAmplifier_currentTextChanged(const QString &arg1);    // TODO
+    void on_comboBoxTimeConstantLockInAmplifier_currentTextChanged(const QString &arg1);
+    void on_comboBoxInputRangeLockInAmplifier_currentTextChanged(const QString &arg1);
+    void on_comboBoxSensivityLockInAmplifier_currentTextChanged(const QString &arg1);
 
-    void on_pushButtonExport_clicked(); // TODO
+    void on_pushButtonExport_clicked();
 
-    void on_pushButtonStart_clicked(); // TODO
-    void on_pushButtonPause_clicked(); // TODO
-    void on_pushButtonStop_clicked();  // TODO
+    void on_pushButtonStart_clicked();
+    void on_pushButtonPause_clicked();
+    void on_pushButtonStop_clicked();
 
-    void on_comboBoxModelLockInAmplifier_currentTextChanged(const QString &arg1); // TODO
-    void on_comboBoxSerialPortLockInAmplifier_currentTextChanged(const QString &arg1); // TODO
-    void on_comboBoxModelGenerator_currentTextChanged(const QString &arg1); // TODO
-    void on_comboBoxSerialPortGenerator_currentTextChanged(const QString &arg1); // TODO
+    void on_comboBoxModelLockInAmplifier_currentTextChanged(const QString &arg1);
+    void on_comboBoxSerialPortLockInAmplifier_currentTextChanged(const QString &arg1);
+    void on_comboBoxModelGenerator_currentTextChanged(const QString &arg1);
+    void on_comboBoxSerialPortGenerator_currentTextChanged(const QString &arg1);
+
+    void on_pushButtonTestEquipment_clicked();
+
+    void on_comboBoxJumpAfterExtremum_currentTextChanged(const QString &arg1);
 
 private:
     Ui::Amarok *ui;
