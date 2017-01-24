@@ -141,9 +141,9 @@ Amarok::Amarok(QWidget *parent) :
     this->listLoad = false;
     this->constructor = false;
 
-    ui->comboBoxSerialPortGenerator->setCurrentText("COM7");
-    ui->comboBoxSerialPortLockInAmplifier->setCurrentText("COM6");
-    ui->comboBoxExperimentMode->setCurrentText("Kinetic");
+//    ui->comboBoxSerialPortGenerator->setCurrentText("COM5");
+//    ui->comboBoxSerialPortLockInAmplifier->setCurrentText("COM6");
+//    ui->comboBoxExperimentMode->setCurrentText("Kinetic");
 
 }
 
@@ -1198,6 +1198,7 @@ void Amarok::setFrequency(const double &new_frequency, bool confirm) const
             return;
 
         this->generator->setFrequency(new_frequency);
+        QTest::qWait(100);
     }
 }
 
@@ -2385,6 +2386,11 @@ void Amarok::on_comboBoxSerialPortLockInAmplifier_currentTextChanged(const QStri
         this->lockInAmplifier->autoSetLockInAmplifierType(ui->comboBoxSerialPortLockInAmplifier->currentText());
         ui->comboBoxModelLockInAmplifier->setCurrentText(this->lockInAmplifier->getLockInAmplifierType());
 
+        if (!this->lockInAmplifier->isActive())
+            this->lockInAmplifier->setConnection(ui->comboBoxSerialPortLockInAmplifier->currentText(),
+                                                 19200,
+                                                 this->lockInAmplifier->getLockInAmplifierType());
+
         if (this->lockInAmplifier->isActive()) {
             ui->groupBoxLockInAmplifier->setTitle("Connected");
             fillLockInAmplifierButtons();
@@ -2552,6 +2558,11 @@ void Amarok::on_comboBoxSerialPortGenerator_currentTextChanged(const QString &ar
 
         this->generator->autoSetGeneratorType(ui->comboBoxSerialPortGenerator->currentText());
         ui->comboBoxModelGenerator->setCurrentText(this->generator->getGeneratorType());
+
+        if (!this->generator->isActive())
+            this->generator->setConnection(ui->comboBoxSerialPortGenerator->currentText(),
+                                           9600,
+                                           this->generator->getGeneratorType());
 
         this->listLoad = false;
 
