@@ -1,2 +1,3 @@
 # ANGEL-Amarok (LTS)
-Something like ELF, but with Kinetics and two plots
+
+Main project for experiment automation. Supports (or will support) RF spectra scanning, kinetics scanning, temperature control
