@@ -11,14 +11,7 @@ CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT
 
 QT.testlib.CONFIG -= console
 
-#INCLUDEPATH += C:/Qt
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
-
-#QMAKE_CXXFLAGS_RELEASE -= -O
-#QMAKE_CXXFLAGS_RELEASE -= -O1
-#QMAKE_CXXFLAGS_RELEASE -= -O2
-#QMAKE_CXXFLAGS_RELEASE *= -O3
 
 QMAKE_LFLAGS_RELEASE += -static -static-libgcc
 
@@ -70,3 +63,10 @@ HEADERS  += Amarok.h \
     ../ANGEL/Angel.h
 
 FORMS    += Amarok.ui
+
+DISTFILES += Resource.rc \
+    ConfigAmarok.conf
+
+RESOURCES += Resource.qrc
+
+win32:RC_FILE = Resource.rc

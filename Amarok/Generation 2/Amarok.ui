@@ -6,12 +6,23 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1469</width>
-    <height>702</height>
+    <width>1109</width>
+    <height>745</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Amarok v 2.0.0</string>
+   <string>Amarok v 2.3.5</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>:/icon/Ico.ico</normaloff>
+    <normalon>:/icon/Ico.ico</normalon>
+    <disabledoff>:/icon/Ico.ico</disabledoff>
+    <disabledon>:/icon/Ico.ico</disabledon>
+    <activeoff>:/icon/Ico.ico</activeoff>
+    <activeon>:/icon/Ico.ico</activeon>
+    <selectedoff>:/icon/Ico.ico</selectedoff>
+    <selectedon>:/icon/Ico.ico</selectedon>:/icon/Ico.ico</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QGroupBox" name="groupBoxLockInAmplifier">
@@ -19,7 +30,7 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>161</width>
+      <width>171</width>
       <height>201</height>
      </rect>
     </property>
@@ -155,7 +166,7 @@
    <widget class="QGroupBox" name="groupBoxGenerator">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>190</x>
       <y>10</y>
       <width>171</width>
       <height>221</height>
@@ -323,188 +334,6 @@
      </layout>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBoxExperimentKinetics">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>430</y>
-      <width>161</width>
-      <height>211</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Kinetics</string>
-    </property>
-    <widget class="QWidget" name="layoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>141</width>
-       <height>185</height>
-      </rect>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_6">
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_44">
-        <item>
-         <widget class="QLabel" name="labelResonanceFrequency">
-          <property name="text">
-           <string>Fres (Hz)</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QDoubleSpinBox" name="doubleSpinBoxResonanceFrequency">
-          <property name="maximum">
-           <double>2000000.000000000000000</double>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_10">
-        <item>
-         <widget class="QLabel" name="labelResonanceWidth">
-          <property name="text">
-           <string>Width (Hz)</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="labelResonanceWidthValue">
-          <property name="text">
-           <string>NA</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_9">
-        <item>
-         <widget class="QLabel" name="labelSNR">
-          <property name="text">
-           <string>SNR</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="labelSNRValue">
-          <property name="text">
-           <string>NA</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboBoxJumpAfterExtremum">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>50</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_49">
-        <item>
-         <widget class="QCheckBox" name="checkBoxAutoKinetics">
-          <property name="text">
-           <string>Auto Jump</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="spinBoxJumpAfterExtremum">
-          <property name="value">
-           <number>10</number>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_14">
-        <item>
-         <widget class="QLabel" name="labelDFresDT">
-          <property name="text">
-           <string>dFres/dt</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboBoxDFresDT"/>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_47">
-        <item>
-         <widget class="QLabel" name="labelJump">
-          <property name="text">
-           <string>Jump (Hz)</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QDoubleSpinBox" name="doubleSpinBoxJump">
-          <property name="maximum">
-           <double>2000000.000000000000000</double>
-          </property>
-          <property name="value">
-           <double>10.000000000000000</double>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_48">
-        <item>
-         <widget class="QLabel" name="labelJumpDevider">
-          <property name="text">
-           <string>Jump devider</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QDoubleSpinBox" name="doubleSpinBoxJumpDevider">
-          <property name="decimals">
-           <number>3</number>
-          </property>
-          <property name="maximum">
-           <double>99.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.100000000000000</double>
-          </property>
-          <property name="value">
-           <double>1.500000000000000</double>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </widget>
-   </widget>
    <widget class="QGroupBox" name="groupBoxExprimentMainSettings">
     <property name="geometry">
      <rect>
@@ -646,10 +475,10 @@
    <widget class="QGroupBox" name="groupBoxPlot_1">
     <property name="geometry">
      <rect>
-      <x>360</x>
+      <x>370</x>
       <y>10</y>
-      <width>221</width>
-      <height>111</height>
+      <width>251</width>
+      <height>121</height>
      </rect>
     </property>
     <property name="title">
@@ -658,7 +487,7 @@
     <widget class="QGroupBox" name="groupBoxPoint_1">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>10</x>
        <y>30</y>
        <width>120</width>
        <height>81</height>
@@ -719,7 +548,7 @@
     <widget class="QGroupBox" name="groupBoxAxis_1">
      <property name="geometry">
       <rect>
-       <x>120</x>
+       <x>140</x>
        <y>10</y>
        <width>101</width>
        <height>101</height>
@@ -794,7 +623,7 @@
    <widget class="QGroupBox" name="groupBoxCurrentReadingsAndTiming">
     <property name="geometry">
      <rect>
-      <x>590</x>
+      <x>630</x>
       <y>10</y>
       <width>211</width>
       <height>221</height>
@@ -959,7 +788,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLCDNumber" name="lcdNumber">
+         <widget class="QLCDNumber" name="lcdNumberCurrentRound">
           <property name="digitCount">
            <number>3</number>
           </property>
@@ -970,43 +799,13 @@
      </layout>
     </widget>
    </widget>
-   <widget class="QCustomPlot" name="customPlot_1" native="true">
-    <property name="geometry">
-     <rect>
-      <x>180</x>
-      <y>240</y>
-      <width>421</width>
-      <height>401</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QCustomPlot" name="customPlot_2" native="true">
-    <property name="geometry">
-     <rect>
-      <x>610</x>
-      <y>240</y>
-      <width>421</width>
-      <height>401</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QCustomPlot" name="customPlot_3" native="true">
-    <property name="geometry">
-     <rect>
-      <x>1040</x>
-      <y>240</y>
-      <width>421</width>
-      <height>401</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QGroupBox" name="groupBoxPlot_2">
     <property name="geometry">
      <rect>
-      <x>810</x>
+      <x>850</x>
       <y>10</y>
-      <width>221</width>
-      <height>111</height>
+      <width>251</width>
+      <height>121</height>
      </rect>
     </property>
     <property name="title">
@@ -1015,7 +814,7 @@
     <widget class="QGroupBox" name="groupBoxPoint_2">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>10</x>
        <y>30</y>
        <width>120</width>
        <height>81</height>
@@ -1076,7 +875,7 @@
     <widget class="QGroupBox" name="groupBoxAxis_2">
      <property name="geometry">
       <rect>
-       <x>120</x>
+       <x>140</x>
        <y>10</y>
        <width>101</width>
        <height>101</height>
@@ -1147,167 +946,335 @@
       </layout>
      </widget>
     </widget>
+    <widget class="QCheckBox" name="checkBoxKineticsSecondPlotEnableRTheta">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>10</y>
+       <width>70</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>RTheta</string>
+     </property>
+    </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBoxThermocontroller">
+   <widget class="QCustomPlot" name="customPlot_1" native="true">
     <property name="geometry">
      <rect>
-      <x>1040</x>
-      <y>10</y>
-      <width>101</width>
-      <height>221</height>
+      <x>190</x>
+      <y>240</y>
+      <width>451</width>
+      <height>441</height>
      </rect>
     </property>
-    <property name="title">
-     <string>Thermocontroller</string>
-    </property>
    </widget>
-   <widget class="QGroupBox" name="groupBoxPlot_3">
+   <widget class="QGroupBox" name="groupBoxResonanceData">
     <property name="geometry">
      <rect>
-      <x>1220</x>
-      <y>20</y>
-      <width>221</width>
+      <x>10</x>
+      <y>430</y>
+      <width>161</width>
       <height>111</height>
      </rect>
     </property>
     <property name="title">
-     <string>Plot 3</string>
+     <string>Resonance Data</string>
     </property>
-    <widget class="QGroupBox" name="groupBoxPoint_3">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>30</y>
-       <width>120</width>
-       <height>81</height>
+       <x>10</x>
+       <y>20</y>
+       <width>137</width>
+       <height>87</height>
       </rect>
      </property>
-     <property name="title">
-      <string>Point</string>
-     </property>
-     <widget class="QWidget" name="layoutWidget_9">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>20</y>
-        <width>101</width>
-        <height>52</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_13">
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_26">
-         <item>
-          <widget class="QLabel" name="labelPointX_3">
-           <property name="text">
-            <string>X</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="lineEditPointX_3">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_27">
-         <item>
-          <widget class="QLabel" name="labelPointY_3">
-           <property name="text">
-            <string>Y</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="lineEditPointY_3">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
+     <layout class="QVBoxLayout" name="verticalLayout_13">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_44">
+        <item>
+         <widget class="QLabel" name="labelResonanceFrequency">
+          <property name="text">
+           <string>Fres (Hz)</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="doubleSpinBoxResonanceFrequency">
+          <property name="maximum">
+           <double>2000000.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_10">
+        <item>
+         <widget class="QLabel" name="labelResonanceWidth">
+          <property name="text">
+           <string>Width (Hz)</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelResonanceWidthValue">
+          <property name="text">
+           <string>NA</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_26">
+        <item>
+         <widget class="QLabel" name="labelResonanceDepth">
+          <property name="text">
+           <string>Depth (Deg)</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelResonanceDepthValue">
+          <property name="text">
+           <string>NA</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_9">
+        <item>
+         <widget class="QLabel" name="labelSNR">
+          <property name="text">
+           <string>SNR</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelSNRValue">
+          <property name="text">
+           <string>NA</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
     </widget>
-    <widget class="QGroupBox" name="groupBoxAxis_3">
+   </widget>
+   <widget class="QGroupBox" name="groupBoxExperimentKinetics">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>550</y>
+      <width>171</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Kinetics</string>
+    </property>
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>120</x>
-       <y>10</y>
-       <width>101</width>
-       <height>101</height>
+       <x>11</x>
+       <y>21</y>
+       <width>153</width>
+       <height>108</height>
       </rect>
      </property>
-     <property name="title">
-      <string>Axises</string>
-     </property>
-     <widget class="QWidget" name="layoutWidget_3">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>20</y>
-        <width>85</width>
-        <height>75</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_14">
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_28">
-         <item>
-          <widget class="QLabel" name="labelYAxis_3">
-           <property name="text">
-            <string>Y</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="comboBoxYAxisValue_3">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_52">
-         <item>
-          <widget class="QLabel" name="labelXAxis_3">
-           <property name="text">
-            <string>X</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="comboBoxXAxisValue_3">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="checkBoxFixPlot_3">
-         <property name="text">
-          <string>Fix Plot</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
+     <layout class="QVBoxLayout" name="verticalLayout_6">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_14">
+        <item>
+         <widget class="QLabel" name="labelDFresDT">
+          <property name="text">
+           <string>dFres/dt</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboBoxDFresDT"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_28">
+        <item>
+         <widget class="QLabel" name="labelExtremumMode">
+          <property name="text">
+           <string>Extremum</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="comboBoxExtremumMode"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_47">
+        <item>
+         <widget class="QLabel" name="labelJump">
+          <property name="text">
+           <string>Jump (Hz)</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="doubleSpinBoxJump">
+          <property name="decimals">
+           <number>4</number>
+          </property>
+          <property name="maximum">
+           <double>2000000.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>10.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_48">
+        <item>
+         <widget class="QLabel" name="labelJumpDivider">
+          <property name="text">
+           <string>Jump devider</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="doubleSpinBoxJumpDivider">
+          <property name="decimals">
+           <number>3</number>
+          </property>
+          <property name="maximum">
+           <double>99.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.100000000000000</double>
+          </property>
+          <property name="value">
+           <double>1.500000000000000</double>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
     </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBoxGeneratorScanningIntervals">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>130</y>
+      <width>251</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Generator Scanning Intervals</string>
+    </property>
+    <widget class="QTextEdit" name="textEditGeneratorScanningIntervals">
+     <property name="geometry">
+      <rect>
+       <x>11</x>
+       <y>52</y>
+       <width>231</width>
+       <height>38</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>11</x>
+       <y>21</y>
+       <width>231</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_27">
+      <item>
+       <widget class="QCheckBox" name="checkBoxMultiIntervalMode">
+        <property name="text">
+         <string>MultiScan</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButtonGeneratorAddInterval">
+        <property name="text">
+         <string>Add Interval</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLCDNumber" name="lcdNumberCurrentInterval">
+        <property name="digitCount">
+         <number>2</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBoxProgramLog">
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>130</y>
+      <width>251</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Program Log</string>
+    </property>
+    <widget class="QTextEdit" name="textEditProgramLog">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>231</width>
+       <height>71</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QCustomPlot" name="customPlot_2" native="true">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>240</y>
+      <width>451</width>
+      <height>441</height>
+     </rect>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -1315,7 +1282,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1469</width>
+     <width>1109</width>
      <height>21</height>
     </rect>
    </property>
@@ -1325,9 +1292,10 @@
     </property>
     <addaction name="actionCOM_Upd"/>
     <addaction name="separator"/>
-    <addaction name="actionSingle_Frequency_Mode"/>
+    <addaction name="actionAllow_Frequency_Step_be_Zero"/>
     <addaction name="actionSet_frequency_step_for_UI"/>
     <addaction name="separator"/>
+    <addaction name="actionExport_Config"/>
    </widget>
    <widget class="QMenu" name="menuEquipment_UI">
     <property name="title">
@@ -1335,7 +1303,6 @@
     </property>
     <addaction name="actionGenerator_UI"/>
     <addaction name="actionLock_In_Amplifier_UI"/>
-    <addaction name="actionThermocontroller_UI"/>
    </widget>
    <widget class="QMenu" name="menuHardware_Text">
     <property name="title">
@@ -1363,38 +1330,53 @@
    </property>
   </action>
   <action name="actionGenerator_UI">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Generator UI</string>
    </property>
   </action>
   <action name="actionLock_In_Amplifier_UI">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Lock-In Amplifier UI</string>
    </property>
   </action>
-  <action name="actionSingle_Frequency_Mode">
-   <property name="text">
-    <string>Single Frequency Mode</string>
-   </property>
-  </action>
   <action name="actionSet_frequency_step_for_UI">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Set frequency step for UI</string>
    </property>
   </action>
-  <action name="actionThermocontroller_UI">
-   <property name="text">
-    <string>Thermocontroller UI</string>
-   </property>
-  </action>
   <action name="actionLock_In_Amplifier_Test">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Lock-In Amplifier Test</string>
    </property>
   </action>
   <action name="actionGenerator_Test">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Generator Test</string>
+   </property>
+  </action>
+  <action name="actionAllow_Frequency_Step_be_Zero">
+   <property name="text">
+    <string>Allow Frequency Step be Zero</string>
+   </property>
+  </action>
+  <action name="actionExport_Config">
+   <property name="text">
+    <string>Export Config</string>
    </property>
   </action>
  </widget>
